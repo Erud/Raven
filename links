@@ -2,12 +2,14 @@ https://github.com/rainforestautomation/Emu-Serial-API/blob/master/emu.py
 https://github.com/CalPlug/python-raven
 https://lxml.de/
 https://stackoverflow.com/questions/15828910/raspberry-pi-rainforest-emu-2-python-read-time-from-sce-smart-meter
+https://www.instructables.com/id/Read-and-write-from-serial-port-with-Raspberry-Pi/
 ---------------------------------------------------------------------
-while read -r line; do
-demand=$(echo "$line" | grep -c "<Demand>")
-if [ $demand -eq 1 ]; then
-cl=$(echo "$line" | sed 's/<[^>]*>//g')
-echo "$(date +"%F %T"),$((cl))" >> "$(date +"%Y%m%d").csv"
-fi
+while read -r line; 
+do
+  demand=$(echo "$line" | grep -c "<Demand>")
+  if [ $demand -eq 1 ]; then
+    cl=$(echo "$line" | sed 's/<[^>]*>//g')
+    echo "$(date +"%F %T"),$((cl))" >> "$(date +"%Y%m%d").csv"
+  fi
 done < /dev/ttyACM0
 -------------------------------------------------------------------
